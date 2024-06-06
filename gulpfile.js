@@ -11,6 +11,7 @@ gulp.task('sass', function() {
         .pipe(cleanCSS({ compatibility: 'ie8' }))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('css'))
+        .pipe(gulp.dest('dist/css'))
         .pipe(browserSync.stream());
 });
 
@@ -19,6 +20,7 @@ gulp.task('scripts', function() {
         .pipe(uglify())
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('js'))
+        .pipe(gulp.dest('dist/js'))
         .pipe(browserSync.stream());
 });
 
@@ -36,7 +38,7 @@ gulp.task('images', async function() {
     const imagemin = await import('gulp-imagemin');
     return gulp.src(['images/*', 'js.js/*', '*.html'])
         .pipe(imagemin.default())
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist/images'));
 });
 
 gulp.task('default', gulp.parallel('sass', 'scripts', 'serve', 'images'));
