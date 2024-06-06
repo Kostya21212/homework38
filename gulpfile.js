@@ -40,5 +40,8 @@ gulp.task('images', async function() {
         .pipe(imagemin.default())
         .pipe(gulp.dest('dist/images'));
 });
-
-gulp.task('default', gulp.parallel('sass', 'scripts', 'serve', 'images'));
+gulp.task('copy-html', function() {
+    return gulp.src('*.html')
+        .pipe(gulp.dest('dist'));
+});
+gulp.task('default', gulp.parallel('sass', 'scripts', 'serve', 'images', 'copy-html'));
