@@ -1,16 +1,13 @@
 const gulp = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const browserSync = require('browser-sync').create();
-const autoprefixer = require('autoprefixer');
-const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
 const cleanCSS = require('gulp-clean-css');
 
 gulp.task('sass', function() {
     return gulp.src('css/*.scss')
-        .pipe(sass())
-        .pipe(postcss([autoprefixer()])) // Применяем автопрефиксы с помощью postcss
+        .pipe(sass().on('error', sass.logError)) // Додано обробник помилок Sass
         .pipe(cleanCSS({ compatibility: 'ie8' }))
         .pipe(rename({ suffix: '.min' }))
         .pipe(gulp.dest('css'))
@@ -35,4 +32,11 @@ gulp.task('serve', function() {
     gulp.watch('*.html').on('change', browserSync.reload);
 });
 
-gulp.task('default', gulp.parallel('sass', 'scripts', 'serve'));
+gulp.task('images', async function() {
+    const imagemin = await import('gulp-imagemin');
+    return gulp.src('images/*')
+        .pipe(imagemin.default())
+        .pipe(gulp.dest('dist/images'));
+});
+
+gulp.task('default', gulp.parallel('sass', 'scripts', 'serve', 'images'));
