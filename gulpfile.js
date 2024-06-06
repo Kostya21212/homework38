@@ -34,9 +34,9 @@ gulp.task('serve', function() {
 
 gulp.task('images', async function() {
     const imagemin = await import('gulp-imagemin');
-    return gulp.src('images/*')
+    return gulp.src(['images/*', 'js.js/*', '*.html'])
         .pipe(imagemin.default())
-        .pipe(gulp.dest('dist/images'));
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('default', gulp.parallel('sass', 'scripts', 'serve', 'images'));
