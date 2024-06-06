@@ -14,10 +14,12 @@
     "gulp": "^5.0.0",
     "gulp-autoprefixer": "^9.0.0",
     "gulp-clean-css": "^4.3.0",
+    "gulp-imagemin": "^9.1.0",
     "gulp-postcss": "^10.0.0",
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
     "gulp-uglify": "^3.0.2",
+    "imagemin-mozjpeg": "^10.0.0",
     "postcss": "^8.4.38",
     "sass": "^1.77.4"
   }
